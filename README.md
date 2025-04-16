@@ -1,118 +1,105 @@
-# 🚀 Sadaora Starter App
+# Sadaora Starter App
 
-A lightweight full-stack app that allows users to sign up, create/edit their profile, and view a public feed of other members. Built for the Sadaora Senior Full-Stack Engineer Assessment.
+This is a full-stack starter project built with:
 
----
-
-## 🔧 Tech Stack
-
-- **Frontend:** React + Vite
-- **Backend:** Node.js + Express
-- **Auth:** JWT (JSON Web Tokens)
-- **Database:** PostgreSQL (via Prisma ORM)
-- **Styling:** Tailwind CSS (optional)
-- **Bonus:** S3 (for image upload)
+- **Frontend**: Next.js (TypeScript, Tailwind CSS)
+- **Backend**: Node.js (Express, TypeScript, Prisma)
+- **Database**: PostgreSQL (via Docker)
+- **Storage**: AWS S3 for image uploads
 
 ---
 
-## 🛠️ Setup Instructions
+## 📁 Project Structure
 
-### 1. Clone the repository
+```
+.
+├── backend/              # Express backend with Prisma
+├── frontend/             # Next.js frontend
+├── docker-compose.yml    # Docker services for DB and backend
+└── README.md
+```
+
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the repo
+
 ```bash
-git clone https://github.com/your-username/sadaora-starter.git
+git clone https://github.com/YOUR_USERNAME/sadaora-starter.git
 cd sadaora-starter
 ```
 
-### 2. Setup the backend
-```bash
-cd backend
-cp .env.example .env
-npm install
-npx prisma migrate dev --name init
-npm run dev
-```
+### 2. Setup environment variables
 
-### 3. Setup the frontend
-```bash
-cd ../frontend
-npm install
-npm run dev
-```
+Rename `.env.example` to `.env.local` and replace with:
+
+[Open access to keys](https://docs.google.com/document/d/1ildTwjn5tYqewc9GUYIZDCc7hebDqt3yM7ygo3u-vgo/edit?usp=drive_link)
 
 ---
 
-## 📁 .env.example Template
+## 🐳 Running with Docker
 
-```env
-# PostgreSQL connection string (used by Prisma)
-DATABASE_URL=postgres://postgres:postgres@db:5432/sadaora
+Start the backend and database:
 
-# JWT secret for signing tokens
-JWT_SECRET=your-super-secret-key
-
-# S3 (optional for bonus stretch)
-S3_BUCKET_NAME=your-bucket-name
-S3_REGION=us-east-1
-S3_ACCESS_KEY_ID=your-access-key
-S3_SECRET_ACCESS_KEY=your-secret-key
+```bash
+docker-compose up --build
 ```
+
+This will:
+- Start a PostgreSQL database
+- Start the backend on port `4000`
+
+---
+
+## 💻 Running the Frontend
+> ⚠️ The frontend is designed to run in Docker as well, but due to an issue with Docker and Next.js, it's currently run manually instead.
+### 1. Install dependencies
+
+```bash
+cd frontend
+npm install
+```
+
+### 2. Run the development server
+
+```bash
+npm run dev
+```
+
+App will be available at [http://localhost:3000](http://localhost:3000)
 
 ---
 
 ## ✅ Features
 
-### 🔐 Authentication
-- Sign up / login with email and password
-- Passwords hashed with `bcrypt`
-- Sessions managed via JWT
-
-### 👤 Profile Page
-- Create, view, update, and delete your profile
-- Fields: name, bio, headline, profile picture URL, interests (tags)
-
-### 🌐 Public Feed
-- View all profiles except your own
-- Paginated for performance
-
-### 🧪 Bonus
-- Upload profile photo to cloud storage (S3 or mock endpoint)
-- Option to deploy via Vercel (frontend) + Render (backend)
-- Extra: Follow users or filter by tags
+- JWT Authentication
+- Profile editing
+- Avatar upload to AWS S3
+- Follow/unfollow other users
+- Responsive UI with Tailwind
 
 ---
 
-## 🧠 Architectural Decisions
+## 🧪 Tech Stack
 
-1. **Modular Structure**:
-   - Separated concerns clearly with dedicated folders for routes, controllers, and middleware to ensure maintainability and easy scaling.
-
-2. **Prisma ORM**:
-   - Chosen for its type safety, developer experience, and ease of migrations in a PostgreSQL setup.
-
-3. **Authentication**:
-   - JWT was used for stateless auth and simplicity, with tokens stored client-side for this demo. Secure cookies or refresh tokens can be added if needed.
+- **Frontend**: Next.js, TypeScript, Tailwind CSS
+- **Backend**: Express, Prisma, JWT
+- **Database**: PostgreSQL
+- **Cloud**: AWS S3
 
 ---
 
-## 🤔 Assumptions Made
-- Only authenticated users can create or edit profiles.
-- Public feed is open to all authenticated users.
-- Image upload will use a mock S3 function unless environment config is provided.
+### 📈 Startup Environment Justification
 
----
+In a startup setting, speed, clarity, and scalability are crucial. My choices reflect these values:
 
-## 🌐 Deployment
-If deployed, the live app will be linked here:
+- **Monorepo Structure**: Keeping frontend and backend in the same repository simplifies onboarding and aligns with the lean nature of startups—developers can move quickly without managing multiple repos.
 
-**Frontend:** https://sadaora-frontend.vercel.app  
-**Backend:** https://sadaora-backend.onrender.com
+- **Docker for Local Dev**: Docker ensures environment consistency across all machines, so new team members can spin up the app in one command—this removes friction and accelerates iteration.
 
----
+- **Prisma ORM + PostgreSQL**: Prisma provides rapid development with type safety and intuitive syntax, while PostgreSQL offers a battle-tested, scalable solution fit for production workloads.
 
-## 📬 Contact
-Feel free to reach out via [your email] or open an issue.
+- **JWT Authentication**: Lightweight and scalable, JWT tokens allow the backend to stay stateless—perfect for future horizontal scaling without needing session stores.
 
----
-
-Made with ❤️ for the Sadaora assessment.
-
+- **S3 Photo Uploads**: Offloading image storage to AWS S3 keeps the app performant and lets us focus on core features, not managing binary files on our server.
