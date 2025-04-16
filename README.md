@@ -67,10 +67,10 @@ npm install
 npm run dev
 ```
 
-### 3. Credentials with two users
+### 3. Credentials for two users
 
 ```bash
-email address: john@example.com for luisa@example.com
+email address: john@example.com or luisa@example.com
 pass: password123
 ```
 
