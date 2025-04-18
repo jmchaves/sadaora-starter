@@ -2,7 +2,7 @@
 
 This is a full-stack starter project built with:
 
-- **Frontend**: Next.js (TypeScript, Tailwind CSS)
+- **Frontend**: Next.js (TypeScript, Tailwind CSS, Zod)
 - **Backend**: Node.js (Express, TypeScript, Prisma)
 - **Database**: PostgreSQL (via Docker)
 - **Storage**: AWS S3 for image uploads
@@ -12,10 +12,9 @@ This is a full-stack starter project built with:
 ## 📁 Project Structure
 
 ```
-.
 ├── backend/              # Express backend with Prisma
 ├── frontend/             # Next.js frontend
-├── docker-compose.yml    # Docker services for DB and backend
+├── docker-compose.yml    # Docker services for frontend, backend and DB
 └── README.md
 ```
 
@@ -40,41 +39,25 @@ Rename `.env.example` to `.env.local` and replace with:
 
 ## 🐳 Running with Docker
 
-Start the backend and database:
+Start the frontend, backend and database:
 
 ```bash
-docker-compose up --build
+docker compose up --build
 ```
 
 This will:
 - Start a PostgreSQL database
 - Start the backend on port `4000`
-
+- App will be available at [http://localhost:3000](http://localhost:3000)
+> ⚠️ Docker will take time to install and run all the services. Please make sure the backend is running before you access to the frontend.
 ---
 
-## 💻 Running the Frontend
-> ⚠️ The frontend is designed to run in Docker as well, but due to an issue with Docker and Next.js, it's currently run manually instead.
-### 1. Install dependencies
-
-```bash
-cd frontend
-npm install
-```
-
-### 2. Run the development server
-
-```bash
-npm run dev
-```
-
-### 3. Credentials for two users
+## 💻 Credentials for two users
 
 ```bash
 email address: john@example.com or luisa@example.com
 pass: password123
 ```
-
-App will be available at [http://localhost:3000](http://localhost:3000)
 
 ---
 
@@ -85,19 +68,20 @@ App will be available at [http://localhost:3000](http://localhost:3000)
 - Avatar upload to AWS S3
 - Follow/unfollow other users
 - Responsive UI with Tailwind
+- Zod for form validation
 
 ---
 
 ## 🧪 Tech Stack
 
-- **Frontend**: Next.js, TypeScript, Tailwind CSS
+- **Frontend**: Next.js, TypeScript, Tailwind CSS, Zod
 - **Backend**: Express, Prisma, JWT
 - **Database**: PostgreSQL
 - **Cloud**: AWS S3
 
 ---
 
-### 📈 Startup Environment Justification
+### 📊 Startup Environment Justification
 
 In a startup setting, speed, clarity, and scalability are crucial. My choices reflect these values:
 
@@ -110,3 +94,12 @@ In a startup setting, speed, clarity, and scalability are crucial. My choices re
 - **JWT Authentication**: Lightweight and scalable, JWT tokens allow the backend to stay stateless—perfect for future horizontal scaling without needing session stores.
 
 - **S3 Photo Uploads**: Offloading image storage to AWS S3 keeps the app performant and lets us focus on core features, not managing binary files on our server.
+
+---
+
+## 🛠️ Future Improvements
+
+- **Component Unit Tests**: Add Jest or Vitest tests for frontend components and backend routes to ensure robustness.
+- **CI/CD Integration**: Set up GitHub Actions for automatic testing and deployment.
+- **Better Error Handling**: Centralize error management in backend to return consistent API responses.
+- **API Rate Limiting**: Add rate limiting (e.g., using `express-rate-limit`) for security.
