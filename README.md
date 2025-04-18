@@ -26,7 +26,7 @@ This is a full-stack starter project built with:
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/YOUR_USERNAME/sadaora-starter.git
+git clone https://github.com/jmchaves/sadaora-starter.git
 cd sadaora-starter
 ```
 
